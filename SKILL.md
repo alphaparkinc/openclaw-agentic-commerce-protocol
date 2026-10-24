@@ -149,7 +149,22 @@ AI agents utilizing the Agentic Commerce Protocol skill must adhere to the follo
 2. **Handle Dynamic Changes:** If the negotiation API indicates that shipping or taxes have updated the total cost, the agent must inform the user and request updated consent.
 3. **Graceful Failures:** In case of inventory exhaustion or card declines (`status: FAILED`), suggest alternative products or payment methods within the natural conversation thread.
 
+---
+
+## Tooling & Executable Scripts
+
+This skill includes battle-tested, zero-dependency Node.js execution scripts in `scripts/`:
+
+*   **`scripts/acp_client.js`**: Core programmatic client implementing `negotiate()`, `mintStripePaymentToken()`, `createCheckoutSession()`, and `getOrderStatus()`. Includes offline mock emulation.
+*   **`scripts/acp_mcp_tool.js`**: Model Context Protocol (MCP) server definitions and execution dispatch for LLM agent integration (`acp_negotiate_cart`, `acp_mint_payment_token`, `acp_create_checkout_session`, `acp_track_order`).
+*   **`scripts/mock_merchant_server.js`**: Standalone HTTP test server implementing standard `/api/acp/*` endpoints.
+*   **`scripts/test_acp_flow.js`**: End-to-end integration test runner validating full flow and idempotency controls.
+
+---
+
 ## References
+* [ACP Architecture & Security](references/acp_architecture.md)
+* [ACP JSON Schema Specification](references/acp_spec.json)
 * [Official Agentic Commerce Dev Portal](https://agenticcommerce.dev)
 * [GitHub: Agentic Commerce Protocol](https://github.com/agentic-commerce-protocol/agentic-commerce-protocol)
 * [Stripe API Documentation](https://stripe.com/docs)
